@@ -11,43 +11,55 @@ import Navbar from "./components/navbar/Navbar.jsx";
 import { createBrowserRouter } from "react-router";
 import { RouterProvider } from "react-router/dom";
 import { CreateTodo } from "./pages/create/createTodo.jsx";
-import { SearchTodo } from './pages/search/searchTodo';
+import { SearchTodo } from "./pages/search/searchTodo";
 import { SkillsTodo } from "./pages/skills/SkillsTodo.jsx";
 import Reducer from "./pages/reducer/reducer.jsx";
+
+const navHOC = (props) => {
+  return (
+    <>
+      <Navbar />
+      <Box sx={{ mt: 10 }}>
+      {
+        props
+      }
+      </Box>
+    </>
+  );
+};
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <App />,
+    element: navHOC(<App/>),
   },
   {
     path: "/create",
-    element: <CreateTodo/>,
+    element: navHOC(<CreateTodo />),
   },
   {
     path: "/search",
-    element: <SearchTodo/>,
+    element: navHOC(<SearchTodo />),
   },
   {
     path: "/skills",
-    element: <SkillsTodo/>,
+    element: navHOC(<SkillsTodo />),
   },
   {
     path: "/red",
-    element: <Reducer/>,
+    element: navHOC(<Reducer />),
   },
   {
     path: "*",
-    element: <h1>404 Todo</h1>,
+    element: navHOC(<h1>404 Todo</h1>),
   },
 ]);
+
+
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <CssBaseline />
-    <Navbar />
-    <Box sx={{ mt: 10 }}>
       <RouterProvider router={router} />,
-    </Box>
   </StrictMode>
 );
